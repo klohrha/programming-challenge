@@ -18,18 +18,16 @@ public final class App {
      * @param args The CLI arguments passed
      */
     public static void main(String... args) {
-        boolean football = false;
         String mode = null;
 
         if (args != null) {
             for (String arg : args) {
                 if ("--weather".equalsIgnoreCase(arg)) {
                     mode = "weather";
-                    football = true;
                 } else if ("--football".equalsIgnoreCase(arg)) {
                     mode = "football";
-                } else if (!arg.startsWith("-")) {
-                    mode = arg;
+                } else {
+                    // ignore other args (e.g., file names) for this simple CLI
                 }
             }
         }
@@ -39,12 +37,15 @@ public final class App {
         String maxColumn;
         String minColumn;
 
+        boolean football;
         if (Objects.equals(mode, "football")) {
+            football = true;
             resourcePath = "/de/exxcellent/challenge/football.csv";
             keyColumn = "Team";
             maxColumn = "Goals";
             minColumn = "Goals Allowed";
         } else if (Objects.equals(mode, "weather")) {
+            football = false;
             resourcePath = "/de/exxcellent/challenge/weather.csv";
             keyColumn = "Day";
             maxColumn = "MxT";
