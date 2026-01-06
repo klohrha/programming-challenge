@@ -17,7 +17,7 @@ public final class SpreadService {
      * Finds the value from the key column for the row that has the smallest absolute difference
      * between maxColumn and minColumn.
      *
-     * @param resourcePath location to read the tabular data from (semantics defined by reader)
+     * @param resourcePath location to read the tabular data from
      * @param keyColumn    name of the key column to return
      * @param maxColumn    name of the first numeric column
      * @param minColumn    name of the second numeric column
