@@ -3,6 +3,7 @@ package de.exxcellent.challenge;
 import de.exxcellent.challenge.core.SpreadService;
 import de.exxcellent.challenge.csv.CsvTableReader;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
@@ -17,22 +18,40 @@ public final class App {
      * @param args The CLI arguments passed
      */
     public static void main(String... args) {
-        boolean football = args != null && args.length > 0 && "--football".equalsIgnoreCase(args[0]);
+        boolean football = false;
+        String mode = null;
+
+        if (args != null) {
+            for (String arg : args) {
+                if ("--weather".equalsIgnoreCase(arg)) {
+                    mode = "weather";
+                    football = true;
+                } else if ("--football".equalsIgnoreCase(arg)) {
+                    mode = "football";
+                } else if (!arg.startsWith("-")) {
+                    mode = arg;
+                }
+            }
+        }
+
         String resourcePath;
         String keyColumn;
         String maxColumn;
         String minColumn;
 
-        if (football) {
+        if (Objects.equals(mode, "football")) {
             resourcePath = "/de/exxcellent/challenge/football.csv";
             keyColumn = "Team";
             maxColumn = "Goals";
             minColumn = "Goals Allowed";
-        } else {
+        } else if (Objects.equals(mode, "weather")) {
             resourcePath = "/de/exxcellent/challenge/weather.csv";
             keyColumn = "Day";
             maxColumn = "MxT";
             minColumn = "MnT";
+        } else {
+            System.err.println("Failed to parse mode");
+            return;
         }
 
         try {
