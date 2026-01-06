@@ -1,5 +1,7 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.core.SpreadService;
+import de.exxcellent.challenge.csv.CsvTableReader;
 import java.io.IOException;
 
 /**
@@ -34,7 +36,8 @@ public final class App {
         }
 
         try {
-            String result = CsvSpreadCalculator.findMinSpread(resourcePath, keyColumn, maxColumn, minColumn);
+            SpreadService service = new SpreadService(new CsvTableReader());
+            String result = service.findMinSpread(resourcePath, keyColumn, maxColumn, minColumn);
             if (football) {
                 System.out.printf("Team with smallest goal spread : %s%n", result);
             } else {

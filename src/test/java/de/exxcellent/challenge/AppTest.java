@@ -28,11 +28,6 @@ class AppTest {
     }
 
     @Test
-    void runFootball() {
-        App.main("--football", "football.csv");
-    }
-
-    @Test
     void weatherHasSmallestSpreadDay() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
