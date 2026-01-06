@@ -41,4 +41,14 @@ class AppTest {
         assertTrue(output.contains("Day with smallest temperature spread : 14"),
                 "Expected smallest spread day to be 14, but output was: " + output);
     }
+
+    @Test
+    void footballHasSmallestSpreadTeam() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        App.main("--football", "football.csv");
+        String output = out.toString();
+        assertTrue(output.contains("Team with smallest goal spread : Aston_Villa"),
+                "Expected smallest spread team to be Aston_Villa, but output was: " + output);
+    }
 }
